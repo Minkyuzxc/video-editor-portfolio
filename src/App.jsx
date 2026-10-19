@@ -33,7 +33,7 @@ const WORK = [
   {
     title: 'Positions',
     length: '00:08',
-    href: 'https://www.tiktok.com/player/v1/77598591160285678865',
+    href: 'https://www.tiktok.com/player/v1/7598591160285678865',
     thumbnail: '/thumbnails/positions.png',
   },
   {
