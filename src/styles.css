@@ -19,17 +19,23 @@ h2{font-size:clamp(2rem,4vw,3.2rem);font-weight:800;margin-bottom:2rem}
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,18rem),1fr));gap:2rem}
 .clip{display:grid;gap:.25rem;text-align:left;text-decoration:none;color:inherit;font:inherit;background:none;border:0;padding:0;cursor:pointer}
 .poster {
-  display: block;
+  position: relative;
+  overflow: hidden;
   width: 100%;
   aspect-ratio: 16 / 9;
   border-radius: .3rem;
   margin-bottom: .5rem;
-  object-fit: cover;
   background: linear-gradient(
     120deg,
     hsl(var(--hue) 55% 22%),
     hsl(calc(var(--hue) + 40) 70% 55%)
   );
+}
+.poster img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 .clip p{color:var(--mute)}
 .clip span{font-variant-numeric:tabular-nums;color:var(--teal)}
@@ -56,7 +62,7 @@ button:disabled{opacity:.6;cursor:wait}
 .rail{margin:0 calc(-1 * clamp(1rem,4vw,3rem));padding:0 clamp(1rem,4vw,3rem)}
 .track{display:flex;gap:1.5rem;overflow-x:auto;overscroll-behavior-inline:contain;scroll-snap-type:x mandatory;scrollbar-width:none;user-select:none;-webkit-user-select:none;padding-bottom:.5rem}
 .track::-webkit-scrollbar{display:none}
-.track .clip{flex:0 0 min(78vw,22rem);scroll-snap-align:start;-webkit-user-drag:none}
+.track .clip{flex:0 0 calc((100% - 1.5rem)/2);scroll-snap-align:start;-webkit-user-drag:none}
 .clip-title{font-family:'Bricolage Grotesque',system-ui,sans-serif;font-size:1.25rem;font-weight:700;letter-spacing:-.03em;line-height:1.2}
 .clip-note{color:var(--mute)}
 .clip-length{font-variant-numeric:tabular-nums;color:var(--teal)}

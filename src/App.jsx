@@ -28,7 +28,7 @@ const WORK = [
     title: 'Baby 123',
     length: '00:28',
     href: 'https://www.tiktok.com/player/v1/7697240308341329172',
-    thumbnail: '/thumbnails/Baby.png',
+    thumbnail: '/thumbnails/baby.png',
   },
   {
     title: 'Positions',
