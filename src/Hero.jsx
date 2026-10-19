@@ -54,10 +54,10 @@ export default function Hero() {
       <canvas ref={ref} aria-hidden="true" />
       <div className="hero-copy">
         <motion.h1 initial={{ clipPath: 'inset(0 0 100% 0)', y: 40 }} animate={{ clipPath: 'inset(0 0 0% 0)', y: 0 }} transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}>
-          I cut the footage you shot into the film people finish.
+          Sharp cuts. Clean timing. Your best moments, made better.
         </motion.h1>
         <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.8 }}>
-          Video editing for brands, documentaries and launches. Tell me about your project, then send me the rushes.
+          Good footage deserves an edit that brings out its best moments.
         </motion.p>
         <motion.a className="btn" href="#contact" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.1 }} whileHover={{ scale: 1.04 }}>
           Contact me
