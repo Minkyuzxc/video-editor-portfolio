@@ -40,7 +40,7 @@ const WORK = [
 
 const embed = (url) => {
   const match = url.match(
-    /tiktok\.com\/@[^/]+\/video\/(\d+)/i
+    /tiktok\.com\/player\/v1\/(\d+)/i
   );
 
   if (!match) return null;
@@ -58,14 +58,14 @@ export default function App() {
     addEventListener('keydown', k);
     return () => removeEventListener('keydown', k);
   }, []);
-  const open = (w) => (e) => {
-  const v = embed(w.href);
+  const open = (w, e) => {
+    const v = embed(w.href);
 
-  if (v) {
-    e.preventDefault();
-    setPlaying({ ...v, title: w.title });
-  }
-};
+    if (v) {
+      e.preventDefault();
+      setPlaying({ ...v, title: w.title });
+    }
+  };
 
   return (
     <>
