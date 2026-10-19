@@ -16,9 +16,9 @@ const WORK = [
 // Turns a public video link into an embeddable player. Returns null for anything else.
 const embed = (u) => {
   let m;
-  if ((m = u.match(/tiktok\.com\/.*\/video\/(\d+)/))) return { src: `https://www.tiktok.com/embed/v2/${m[1]}`, tall: true };
-  if ((m = u.match(/tiktok\.com\/.*\/video\/(\d+)/))) return { src: `https://www.tiktok.com/@doyrimon/video/7537793143538830600${m[1]}?autoplay=1`, tall: false };
-  if ((m = u.match(/tiktok\.com\/.*\/video\/(\d+)/))) return { src: `https://www.tiktok.com/@doyrimon/video/7527534045132049672${m[1]}?autoplay=1`, tall: false };
+  if ((m = u.match(/tiktok\.com\/.*\/video\/(\d+)/))) return { src: `https://www.tiktok.com/player/v1/7603526025791737096${m[1]}`, tall: true };
+  if ((m = u.match(/tiktok\.com\/.*\/video\/(\d+)/))) return { src: `https://www.tiktok.com/player/v1/7537793143538830600${m[1]}`, tall: false };
+  if ((m = u.match(/tiktok\.com\/.*\/video\/(\d+)/))) return { src: `https://www.tiktok.com/player/v1/7527534045132049672${m[1]}`, tall: false };
   return null;
 };
 
