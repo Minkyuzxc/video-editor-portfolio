@@ -1,32 +1,50 @@
 import { useEffect, useRef, useState } from 'react';
-import { motion } from 'framer-motion';
 
-// Hold and drag (mouse) or swipe (touch) from right to left to reveal more videos.
 export default function Work({ items, onPlay }) {
-  const track = useRef(), moved = useRef(false);
-  const [limit, setLimit] = useState(0);
+  const track = useRef(null);
+  const [canScroll, setCanScroll] = useState(false);
+
   useEffect(() => {
-    const measure = () => setLimit(Math.max(0, track.current.scrollWidth - track.current.clientWidth));
-    measure(); addEventListener('resize', measure);
-    return () => removeEventListener('resize', measure);
+    const element = track.current;
+    if (!element) return undefined;
+
+    const measure = () => setCanScroll(element.scrollWidth > element.clientWidth + 1);
+    measure();
+    const observer = new ResizeObserver(measure);
+    observer.observe(element);
+    if (element.firstElementChild) observer.observe(element.firstElementChild);
+    return () => observer.disconnect();
   }, [items]);
 
+  const move = (direction) => {
+    const element = track.current;
+    if (!element) return;
+    const card = element.querySelector('.clip');
+    const distance = card ? card.getBoundingClientRect().width + 24 : element.clientWidth;
+    element.scrollBy({ left: direction * distance, behavior: 'smooth' });
+  };
+
   return (
-    <div className="rail">
-      <motion.div
-        ref={track} className="track" drag="x" dragElastic={0.1} dragConstraints={{ left: -limit, right: 0 }}
-        onDragStart={() => { moved.current = true; }}
-        onDragEnd={() => setTimeout(() => { moved.current = false; }, 50)} // so letting go doesn't count as a click
-      >
-        {items.map((w, i) => (
-          <a key={w.title} href={w.href} draggable="false" className="clip" onClick={(e) => (moved.current ? e.preventDefault() : onPlay(w, e))}>
-            <div className="poster" style={{ '--hue': 190 + i * 55 }} />
-            <h3>{w.title}</h3>
-            <p>{w.note}</p>
-            <span>{w.length}</span>
-          </a>
-        ))}
-      </motion.div>
+    <div className="carousel">
+      {canScroll && (
+        <div className="carousel-controls" aria-label="Video carousel controls">
+          <button type="button" className="carousel-arrow" aria-label="Previous videos" onClick={() => move(-1)}>‹</button>
+          <button type="button" className="carousel-arrow" aria-label="Next videos" onClick={() => move(1)}>›</button>
+        </div>
+      )}
+      <div className="rail">
+        <div ref={track} className="track" aria-label="Recent video work">
+          {items.map((w, i) => (
+            <button key={w.title} type="button" className="clip" onClick={() => onPlay(w)}>
+              <span className="poster" style={{ '--hue': 190 + i * 55 }} aria-hidden="true" />
+              <span className="clip-title">{w.title}</span>
+              <span className="clip-note">{w.note}</span>
+              <span className="clip-length">{w.length}</span>
+            </button>
+          ))}
+        </div>
+      </div>
+      <p className="hint">Swipe, scroll, or use the arrows to browse videos</p>
     </div>
   );
 }

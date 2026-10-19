@@ -39,10 +39,7 @@ const WORK = [
 ];
 
 const embed = (url) => {
-  const match = url.match(
-    /tiktok\.com\/player\/v1\/(\d+)/i
-  );
-
+  const match = url.match(/tiktok\.com\/(?:player\/v1\/|@[^/]+\/video\/)(\d+)/i);
   if (!match) return null;
 
   return {
@@ -58,11 +55,9 @@ export default function App() {
     addEventListener('keydown', k);
     return () => removeEventListener('keydown', k);
   }, []);
-  const open = (w, e) => {
+  const open = (w) => {
     const v = embed(w.href);
-
     if (v) {
-      e.preventDefault();
       setPlaying({ ...v, title: w.title });
     }
   };
@@ -77,7 +72,6 @@ export default function App() {
       <section id="work" className="wrap">
         <h2>Recent cuts</h2>
         <Work items={WORK} onPlay={open} />
-        <p className="hint">Hold and drag, or swipe, to see more</p>
       </section>
       <section id="contact" className="wrap split">
         <div>
@@ -90,7 +84,7 @@ export default function App() {
         {playing && (
           <motion.div className="modal" role="dialog" aria-modal="true" aria-label={playing.title} onClick={() => setPlaying(null)} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
             <motion.div className={playing.tall ? 'player tall' : 'player'} onClick={(e) => e.stopPropagation()} initial={{ scale: 0.94 }} animate={{ scale: 1 }} exit={{ scale: 0.94 }}>
-              <iframe src={playing.src} title={playing.title} allow="autoplay; fullscreen; encrypted-media; picture-in-picture" allowFullScreen />
+              <iframe src={playing.src} title={playing.title} sandbox="allow-scripts allow-same-origin allow-presentation" allow="autoplay; fullscreen; encrypted-media; picture-in-picture" allowFullScreen />
               <button className="btn close" onClick={() => setPlaying(null)}>Close</button>
             </motion.div>
           </motion.div>
