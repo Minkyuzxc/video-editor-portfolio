@@ -35,7 +35,7 @@ export default function Hero() {
     const mouse = [0.5, 0.5], still = matchMedia('(prefers-reduced-motion: reduce)').matches;
     let raf;
     const size = () => {
-      const d = Math.min(devicePixelRatio, 1.5);
+      const d = Math.min(devicePixelRatio, innerWidth < 700 ? 1 : 1.5);
       cv.width = cv.clientWidth * d; cv.height = cv.clientHeight * d; gl.viewport(0, 0, cv.width, cv.height);
     };
     const move = (e) => { mouse[0] = e.clientX / innerWidth; mouse[1] = 1 - e.clientY / innerHeight; };

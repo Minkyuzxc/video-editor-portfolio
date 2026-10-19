@@ -1,45 +1,18 @@
 import { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import Hero from './Hero';
-import Events from './Events';
 import Contact from './Contact';
+import Work from './Work';
+import { SITE, WORK } from './content';
 
-// Edit these: name, email and the work cards. formUrl is optional (see README).
-// A work href can be a full TikTok, YouTube or Vimeo link. The video then plays in a pop-up on your site.
-const SITE = { name: 'James Lumayag', email: 'lumayagjames64@gmail.com' };
-const WORK = [
-  {
-    title: 'Thousand years',
-    note: 'Polishing my skills',
-    length: '00:35',
-    href: 'https://www.tiktok.com/player/v1/7603526025791737096',
-  },
-  {
-    title: 'When I was your man',
-    note: 'Valorant edit that took me 1 day to complete',
-    length: '00:37',
-    href: 'https://www.tiktok.com/player/v1/7537793143538830600',
-  },
-  {
-    title: 'Obsessed',
-    note: 'Short Valorant edit for myself',
-    length: '00:14',
-    href: 'https://www.tiktok.com/player/v1/7527534045132049672',
-  },
-];
 
 // Turns a public video link into an embeddable player. Returns null for anything else.
-const embed = (url) => {
-  const match = url.match(
-    /tiktok\.com\/@[^/]+\/video\/(\d+)/i
-  );
-
-  if (!match) return null;
-
-  return {
-    src: `https://www.tiktok.com/player/v1/${match[1]}?autoplay=1`,
-    tall: true,
-  };
+const embed = (u) => {
+  let m;
+  if ((m = u.match(/tiktok\.com\/.*\/video\/(\d+)/))) return { src: `https://www.tiktok.com/embed/v2/${m[1]}`, tall: true };
+  if ((m = u.match(/(?:youtu\.be\/|[?&]v=)([\w-]{11})/))) return { src: `https://www.youtube-nocookie.com/embed/${m[1]}?autoplay=1`, tall: false };
+  if ((m = u.match(/vimeo\.com\/(\d+)/))) return { src: `https://player.vimeo.com/video/${m[1]}?autoplay=1`, tall: false };
+  return null;
 };
 
 export default function App() {
@@ -49,7 +22,7 @@ export default function App() {
     addEventListener('keydown', k);
     return () => removeEventListener('keydown', k);
   }, []);
-  const open = (w) => (e) => {
+  const open = (w, e) => {
     const v = embed(w.href);
     if (v) { e.preventDefault(); setPlaying({ ...v, title: w.title }); } // otherwise the link opens normally
   };
@@ -58,25 +31,13 @@ export default function App() {
     <>
       <header className="nav">
         <a href="#top" className="logo">{SITE.name}</a>
-        <nav><a href="#work">Work</a><a href="#events">Events</a><a href="#contact">Contact</a></nav>
+        <nav><a href="#work">Work</a><a href="#contact">Contact</a></nav>
       </header>
       <Hero />
       <section id="work" className="wrap">
-        <h2>Recent works</h2>
-        <div className="grid">
-          {WORK.map((w, i) => (
-            <motion.a key={w.title} href={w.href} onClick={open(w)} className="clip" whileHover={{ y: -6 }} whileTap={{ scale: 0.98 }}>
-              <div className="poster" style={{ '--hue': 190 + i * 55 }} />
-              <h3>{w.title}</h3>
-              <p>{w.note}</p>
-              <span>{w.length}</span>
-            </motion.a>
-          ))}
-        </div>
-      </section>
-      <section id="events" className="wrap">
-        <h2>Events</h2>
-        <Events />
+        <h2>Recent cuts</h2>
+        <Work items={WORK} onPlay={open} />
+        <p className="hint">Hold and drag, or swipe, to see more</p>
       </section>
       <section id="contact" className="wrap split">
         <div>
