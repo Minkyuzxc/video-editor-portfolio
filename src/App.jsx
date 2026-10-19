@@ -8,9 +8,9 @@ import Contact from './Contact';
 // A work href can be a full TikTok, YouTube or Vimeo link. The video then plays in a pop-up on your site.
 const SITE = { name: 'James Lumayag', email: 'lumayagjames64@gmail.com' };
 const WORK = [
-  { title: 'Video edit #1', note: 'Brand film for a ceramics studio', length: '2:10', href: '#' },
-  { title: 'Video edit #2', note: 'Festival documentary, 38-minute cut', length: '38:00', href: '#' },
-  { title: 'Video edit #3', note: 'Launch trailer with motion graphics', length: '0:45', href: '#' },
+  { title: 'Thousand years', note: 'Polishing my skills', length: '00:35', href: 'https://www.tiktok.com/@doyrimon/video/7603526025791737096' },
+  { title: 'When I was your man', note: 'Valorant edit that took me 1 day to complete', length: '00:37', href: 'https://www.tiktok.com/@doyrimon/video/7537793143538830600' },
+  { title: 'Obsessed', note: 'Short Valorant edit for myself', length: '00:14', href: 'https://www.tiktok.com/@doyrimon/video/7527534045132049672' },
 ];
 
 // Turns a public video link into an embeddable player. Returns null for anything else.
