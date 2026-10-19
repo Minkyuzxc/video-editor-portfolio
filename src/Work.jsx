@@ -33,7 +33,20 @@ export default function Work({ items, onPlay }) {
         </div>
       )}
       <div className="rail">
-        <div ref={track} className="track" aria-label="Recent video work">
+        <div
+          ref={track}
+          className="track"
+          role="region"
+          aria-roledescription="carousel"
+          aria-label="Recent video work. Use the left and right arrow keys to browse."
+          tabIndex={0}
+          onKeyDown={(event) => {
+            if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
+              event.preventDefault();
+              move(event.key === 'ArrowLeft' ? -1 : 1);
+            }
+          }}
+        >
           {items.map((w, i) => (
             <button key={w.title} type="button" className="clip" onClick={() => onPlay(w)}>
               <span className="poster" style={{ '--hue': 190 + i * 55 }} aria-hidden="true" />
