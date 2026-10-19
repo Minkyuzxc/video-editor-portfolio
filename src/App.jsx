@@ -7,12 +7,17 @@ import { SITE, WORK } from './content';
 
 
 // Turns a public video link into an embeddable player. Returns null for anything else.
-const embed = (u) => {
-  let m;
-  if ((m = u.match(/tiktok\.com\/.*\/video\/(\d+)/))) return { src: `https://www.tiktok.com/embed/v2/${m[1]}`, tall: true };
-  if ((m = u.match(/(?:youtu\.be\/|[?&]v=)([\w-]{11})/))) return { src: `https://www.youtube-nocookie.com/embed/${m[1]}?autoplay=1`, tall: false };
-  if ((m = u.match(/vimeo\.com\/(\d+)/))) return { src: `https://player.vimeo.com/video/${m[1]}?autoplay=1`, tall: false };
-  return null;
+const embed = (url) => {
+  const match = url.match(
+    /tiktok\.com\/@[^/]+\/video\/(\d+)/i
+  );
+
+  if (!match) return null;
+
+  return {
+    src: `https://www.tiktok.com/player/v1/${match[1]}?autoplay=1`,
+    tall: true,
+  };
 };
 
 export default function App() {
