@@ -42,7 +42,7 @@ export default function App() {
       </header>
       <Hero />
       <section id="work" className="wrap">
-        <h2>Recent cuts</h2>
+        <h2>Recent works</h2>
         <div className="grid">
           {WORK.map((w, i) => (
             <motion.a key={w.title} href={w.href} onClick={open(w)} className="clip" whileHover={{ y: -6 }} whileTap={{ scale: 0.98 }}>
