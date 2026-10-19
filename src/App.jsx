@@ -3,7 +3,6 @@ import { AnimatePresence, motion } from 'framer-motion';
 import Hero from './Hero';
 import Contact from './Contact';
 import Work from './Work';
-import { SITE, WORK } from './content';
 
 const SITE = { name: 'James Lumayag', email: 'lumayagjames64@gmail.com' };
 const WORK = [
@@ -59,10 +58,14 @@ export default function App() {
     addEventListener('keydown', k);
     return () => removeEventListener('keydown', k);
   }, []);
-  const open = (w, e) => {
-    const v = embed(w.href);
-    if (v) { e.preventDefault(); setPlaying({ ...v, title: w.title }); } // otherwise the link opens normally
-  };
+  const open = (w) => (e) => {
+  const v = embed(w.href);
+
+  if (v) {
+    e.preventDefault();
+    setPlaying({ ...v, title: w.title });
+  }
+};
 
   return (
     <>
