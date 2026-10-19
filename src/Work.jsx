@@ -57,7 +57,7 @@ export default function Work({ items, onPlay }) {
           ))}
         </div>
       </div>
-      <p className="hint">Swipe, scroll, or use the arrows to browse videos</p>
+      <p className="hint"></p>
     </div>
   );
 }

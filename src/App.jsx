@@ -36,6 +36,18 @@ const WORK = [
     length: '00:08',
     href: 'https://www.tiktok.com/player/v1/77598591160285678865',
   },  
+  {
+    title: 'Back to friends',
+    note: 'Valorant edit',
+    length: '00:21',
+    href: 'https://www.tiktok.com/player/v1/7595916334064487697',
+  },  
+  {
+    title: 'I wanna be yours',
+    note: 'First 1080p Valorant edit',
+    length: '00:30',
+    href: 'https://www.tiktok.com/player/v1/7506030386246454545',
+  },
 ];
 
 const embed = (url) => {
