@@ -2,11 +2,11 @@ import { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import Hero from './Hero';
 import Events from './Events';
-import Booking from './Booking';
+import Contact from './Contact';
 
-// Edit these: name, email and the work cards.
-// href can be a full TikTok, YouTube or Vimeo link. The video then plays in a pop-up on your site.
-export const SITE = { name: 'James Lumayag', email: 'lumayagjames64@gmail.com' };
+// Edit these: name, email and the work cards. formUrl is optional (see README).
+// A work href can be a full TikTok, YouTube or Vimeo link. The video then plays in a pop-up on your site.
+const SITE = { name: 'James Lumayag', email: 'lumayagjames64@gmail.com' };
 const WORK = [
   { title: 'Video edit #1', note: 'Brand film for a ceramics studio', length: '2:10', href: '#' },
   { title: 'Video edit #2', note: 'Festival documentary, 38-minute cut', length: '38:00', href: '#' },
@@ -23,14 +23,7 @@ const embed = (u) => {
 };
 
 export default function App() {
-  const [session, setSessionState] = useState(() => JSON.parse(localStorage.getItem('session') || 'null'));
-  const [refresh, setRefresh] = useState(0);
-  const [picked, setPicked] = useState(null);
   const [playing, setPlaying] = useState(null);
-  const setSession = (s) => {
-    setSessionState(s);
-    s ? localStorage.setItem('session', JSON.stringify(s)) : localStorage.removeItem('session');
-  };
   useEffect(() => {
     const k = (e) => e.key === 'Escape' && setPlaying(null);
     addEventListener('keydown', k);
@@ -45,7 +38,7 @@ export default function App() {
     <>
       <header className="nav">
         <a href="#top" className="logo">{SITE.name}</a>
-        <nav><a href="#work">Work</a><a href="#book">Book a time</a><a href="#contact">Contact</a></nav>
+        <nav><a href="#work">Work</a><a href="#events">Events</a><a href="#contact">Contact</a></nav>
       </header>
       <Hero />
       <section id="work" className="wrap">
@@ -61,17 +54,17 @@ export default function App() {
           ))}
         </div>
       </section>
-      <section id="book" className="wrap split">
-        <div>
-          <h2>Pick a time</h2>
-          <Events token={session?.token} refresh={refresh} onPick={setPicked} />
-        </div>
-        <Booking session={session} setSession={setSession} picked={picked} onBooked={() => setRefresh((r) => r + 1)} />
+      <section id="events" className="wrap">
+        <h2>Events</h2>
+        <Events />
       </section>
-      <footer id="contact" className="wrap">
-        <h2>Have footage that needs a cut?</h2>
-        <a className="btn" href={`mailto:${SITE.email}`}>Email {SITE.name.split(' ')[0]}</a>
-      </footer>
+      <section id="contact" className="wrap split">
+        <div>
+          <h2>Have footage that needs a cut?</h2>
+          <p className="lede">Tell me about the project, how long it should run and when you need it. You can also write to <a href={`mailto:${SITE.email}`}>{SITE.email}</a>.</p>
+        </div>
+        <Contact email={SITE.email} formUrl={SITE.formUrl} />
+      </section>
       <AnimatePresence>
         {playing && (
           <motion.div className="modal" role="dialog" aria-modal="true" aria-label={playing.title} onClick={() => setPlaying(null)} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>

@@ -57,10 +57,10 @@ export default function Hero() {
           I cut the footage you shot into the film people finish.
         </motion.h1>
         <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.8 }}>
-          Video editing for brands, documentaries and launches. Book a call, then send me the rushes.
+          Video editing for brands, documentaries and launches. Tell me about your project, then send me the rushes.
         </motion.p>
-        <motion.a className="btn" href="#book" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.1 }} whileHover={{ scale: 1.04 }}>
-          Book a time
+        <motion.a className="btn" href="#contact" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.1 }} whileHover={{ scale: 1.04 }}>
+          Contact me
         </motion.a>
       </div>
     </section>
