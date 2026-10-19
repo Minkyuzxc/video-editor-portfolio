@@ -10,36 +10,43 @@ const WORK = [
     title: 'Thousand years',
     length: '00:35',
     href: 'https://www.tiktok.com/player/v1/7603526025791737096',
+    thumbnail: '/thumbnails/Thousandyears.png',
   },
   {
     title: 'When I was your man',
     length: '00:37',
     href: 'https://www.tiktok.com/player/v1/7537793143538830600',
+    thumbnail: '/thumbnails/yourman.png',
   },
   {
     title: 'Obsessed',
     length: '00:14',
     href: 'https://www.tiktok.com/player/v1/7527534045132049672',
+    thumbnail: '/thumbnails/Obsessed.png',
   },
   {
     title: 'Baby 123',
     length: '00:28',
     href: 'https://www.tiktok.com/player/v1/7697240308341329172',
+    thumbnail: '/thumbnails/Baby.png',
   },
   {
     title: 'Positions',
     length: '00:08',
     href: 'https://www.tiktok.com/player/v1/77598591160285678865',
-  },  
+    thumbnail: '/thumbnails/positions.png',
+  },
   {
     title: 'Back to friends',
     length: '00:21',
     href: 'https://www.tiktok.com/player/v1/7595916334064487697',
+    thumbnail: '/thumbnails/friends.png',
   },  
   {
     title: 'I wanna be yours',
     length: '00:30',
     href: 'https://www.tiktok.com/player/v1/7506030386246454545',
+    thumbnail: '/thumbnails/yours.png',
   },
 ];
 

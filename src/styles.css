@@ -18,7 +18,19 @@ a{color:inherit}
 h2{font-size:clamp(2rem,4vw,3.2rem);font-weight:800;margin-bottom:2rem}
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,18rem),1fr));gap:2rem}
 .clip{display:grid;gap:.25rem;text-align:left;text-decoration:none;color:inherit;font:inherit;background:none;border:0;padding:0;cursor:pointer}
-.poster{aspect-ratio:16/9;border-radius:.3rem;margin-bottom:.5rem;background:linear-gradient(120deg,hsl(var(--hue) 55% 22%),hsl(calc(var(--hue) + 40) 70% 55%))}
+.poster {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: .3rem;
+  margin-bottom: .5rem;
+  object-fit: cover;
+  background: linear-gradient(
+    120deg,
+    hsl(var(--hue) 55% 22%),
+    hsl(calc(var(--hue) + 40) 70% 55%)
+  );
+}
 .clip p{color:var(--mute)}
 .clip span{font-variant-numeric:tabular-nums;color:var(--teal)}
 .split{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(0,1fr);gap:3rem;align-items:start}

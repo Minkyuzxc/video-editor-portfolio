@@ -49,7 +49,7 @@ export default function Work({ items, onPlay }) {
         >
           {items.map((w, i) => (
             <button key={w.title} type="button" className="clip" onClick={() => onPlay(w)}>
-              <span className="poster" style={{ '--hue': 190 + i * 55 }} aria-hidden="true" />
+              <img className="poster" src={w.thumbnail} alt="" loading="lazy" />
               <span className="clip-title">{w.title}</span>
               <span className="clip-note">{w.note}</span>
               <span className="clip-length">{w.length}</span>
