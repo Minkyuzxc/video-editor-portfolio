@@ -48,7 +48,7 @@ export default function Work({ items, onPlay }) {
           }}
         >
           {items.map((w, i) => (
-            <button key={w.title} type="button" className="clip" onClick={() => onPlay(w)}>
+            <button key={w.href} type="button" className="clip" onClick={() => onPlay(w)}>
               <div className="poster" style={{ '--hue': 190 + i * 55 }}>
                 <img src={w.thumbnail} alt="" loading="lazy" />
               </div>

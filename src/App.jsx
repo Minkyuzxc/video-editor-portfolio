@@ -7,6 +7,20 @@ import Work from './Work';
 const SITE = { name: 'James Lumayag', email: 'lumayagjames64@gmail.com' };
 const WORK = [
   {
+    title: 'Eddie Higher Up Wellness challenge',
+    length: '00:59',
+    href: '/videos/video_2026-10-27_10-17-01_MINKS.mp4',
+    thumbnail: '/thumbnails/eddie-introduction.jpg',
+    type: 'video',
+  },
+  {
+    title: 'Eddie Higher Up Wellness challenge',
+    length: '00:59',
+    href: '/videos/video_2026-10-27_10-17-21_MINKS.mp4',
+    thumbnail: '/thumbnails/eddie-daily-vlog.jpg',
+    type: 'video',
+  },
+  {
     title: 'Thousand years',
     length: '00:35',
     href: 'https://www.tiktok.com/player/v1/7603526025791737096',
@@ -68,7 +82,7 @@ export default function App() {
     return () => removeEventListener('keydown', k);
   }, []);
   const open = (w) => {
-    const v = embed(w.href);
+    const v = w.type === 'video' ? { src: w.href, tall: true, type: 'video' } : embed(w.href);
     if (v) {
       setPlaying({ ...v, title: w.title });
     }
@@ -96,7 +110,11 @@ export default function App() {
         {playing && (
           <motion.div className="modal" role="dialog" aria-modal="true" aria-label={playing.title} onClick={() => setPlaying(null)} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
             <motion.div className={playing.tall ? 'player tall' : 'player'} onClick={(e) => e.stopPropagation()} initial={{ scale: 0.94 }} animate={{ scale: 1 }} exit={{ scale: 0.94 }}>
-              <iframe src={playing.src} title={playing.title} sandbox="allow-scripts allow-same-origin allow-presentation" allow="autoplay; fullscreen; encrypted-media; picture-in-picture" allowFullScreen />
+              {playing.type === 'video' ? (
+                <video key={playing.src} src={playing.src} title={playing.title} aria-label={playing.title} controls autoPlay playsInline preload="metadata" />
+              ) : (
+                <iframe src={playing.src} title={playing.title} sandbox="allow-scripts allow-same-origin allow-presentation" allow="autoplay; fullscreen; encrypted-media; picture-in-picture" allowFullScreen />
+              )}
               <button className="btn close" onClick={() => setPlaying(null)}>Close</button>
             </motion.div>
           </motion.div>
